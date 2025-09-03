@@ -1,0 +1,30 @@
+<div class="space-y-4">
+  <div *ngFor="let lang of languages" class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+    <div class="flex items-center justify-between mb-3">
+      <div class="flex items-center space-x-3">
+        <span class="text-2xl">{{lang.flag}}</span>
+        <div>
+          <h3 class="text-base font-semibold text-gray-900 dark:text-white">{{lang.name}}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">{{lang.proficiency}}</p>
+        </div>
+      </div>
+      <span class="text-sm font-medium text-blue-600 dark:text-blue-400">{{lang.level}}%</span>
+    </div>
+
+    <!-- Proficiency Bar -->
+    <div class="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+      <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
+           [style.width.%]="lang.level"></div>
+    </div>
+  </div>
+
+  <!-- Add Language Button -->
+  <div class="text-center pt-4">
+    <button class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+      </svg>
+      Add Language
+    </button>
+  </div>
+</div>

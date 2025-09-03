@@ -1,14 +1,42 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { HeroComponent } from "./hero/hero.component";
+import { ExperienceComponent } from "./experience/experience.component";
+import { SkillsComponent } from "./skills/skills.component";
+import { EducationComponent } from "./education/education.component";
+import { LanguagesComponent } from "./languages/languages.component";
+import { ActivityComponent } from "./activity/activity.component";
+import { VolunteeringComponent } from "./volunteering/volunteering.component";
+import { ProjectsComponent } from "./projects/projects.component";
 
 @Component({
   selector: 'app-root',
-  imports: [ HeroComponent],
+  imports: [
+    CommonModule,
+    HeroComponent,
+    ExperienceComponent,
+    SkillsComponent,
+    EducationComponent,
+    LanguagesComponent,
+    ActivityComponent,
+    VolunteeringComponent,
+    ProjectsComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
   title = 'portfolio-shihab';
+  activeTab = 'experience';
+
+  tabs = [
+    { id: 'experience', label: 'Experience' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'education', label: 'Education' },
+    { id: 'languages', label: 'Languages' },
+    { id: 'activity', label: 'Activity' },
+    { id: 'volunteering', label: 'Volunteering' }
+  ];
 
   ngOnInit() {
     // Initialize theme based on system preference or saved preference
@@ -17,6 +45,10 @@ export class AppComponent implements OnInit {
 
     const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
     this.setTheme(theme);
+  }
+
+  setActiveTab(tabId: string) {
+    this.activeTab = tabId;
   }
 
   toggleTheme() {

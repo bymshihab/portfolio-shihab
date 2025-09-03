@@ -2,3 +2,158 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Subtle background patterns and animations */
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+
+  /* Mobile-first base styles */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  /* Animated gradient backgrounds - Mobile optimized */
+  .bg-gradient-animated {
+    background: linear-gradient(-45deg, #f3f4f6, #e5e7eb, #d1d5db, #f9fafb);
+    background-size: 200% 200%;
+    animation: gradient-x 20s ease infinite;
+  }
+
+  .bg-gradient-animated-dark {
+    background: linear-gradient(-45deg, #111827, #1f2937, #374151, #1a202c);
+    background-size: 200% 200%;
+    animation: gradient-x 20s ease infinite;
+  }
+
+  /* Mobile-optimized dot pattern overlay */
+  .bg-dots {
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 15px 15px;
+  }
+
+  .bg-dots-dark {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 15px 15px;
+  }
+
+  /* Desktop dot pattern */
+  @media (min-width: 768px) {
+    .bg-dots {
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .bg-dots-dark {
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+  }
+
+  /* Floating orbs for subtle background decoration - Desktop only */
+  .floating-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .floating-orb {
+      display: block;
+    }
+
+    .floating-orb-1 {
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(45deg, rgba(34, 197, 94, 0.1), rgba(59, 130, 246, 0.1));
+      top: 10%;
+      left: 10%;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .floating-orb-2 {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(45deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+      top: 60%;
+      right: 10%;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    .floating-orb-3 {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
+      bottom: 20%;
+      left: 60%;
+      animation: float 12s ease-in-out infinite;
+    }
+  }
+
+  /* Mobile-specific smaller orbs */
+  @media (max-width: 767px) {
+    .floating-orb-1 {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, rgba(34, 197, 94, 0.05), rgba(59, 130, 246, 0.05));
+      top: 20%;
+      left: 5%;
+      animation: float 12s ease-in-out infinite;
+      display: block;
+    }
+
+    .floating-orb-2 {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, rgba(168, 85, 247, 0.05), rgba(236, 72, 153, 0.05));
+      top: 70%;
+      right: 5%;
+      animation: float 15s ease-in-out infinite reverse;
+      display: block;
+    }
+  }
+
+  /* Mobile-responsive touch targets */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Safe area insets for mobile devices */
+  .safe-area {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Improved mobile scrolling */
+  .smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Mobile-friendly animations */
+  @media (prefers-reduced-motion: reduce) {
+    .floating-orb,
+    .bg-gradient-animated,
+    .bg-gradient-animated-dark {
+      animation: none;
+    }
+
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

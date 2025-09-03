@@ -1,82 +1,85 @@
 <app-header (themeToggle)="toggleTheme()"></app-header>
 
-<main class="min-h-screen bg-gray-50 dark:bg-gray-900">
-  <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <section>
+<main class="min-h-screen bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
+  <!-- Animated background gradient -->
+  <div class="fixed inset-0 bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-blue-900 opacity-50"></div>
+
+  <section class="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+    <!-- Hero Section -->
+    <section class="hero-section mb-6 sm:mb-8">
       <app-hero></app-hero>
     </section>
 
-    <section class="mt-6">
-      <div
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <!-- Profile Details Section -->
+    <section class="animate-section mb-6 sm:mb-8">
+      <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl">
         <!-- Profile Section Header -->
-        <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Profile Details</h2>
+        <div class="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
+          <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">Profile Details</h2>
         </div>
 
-        <!-- Tabs Navigation -->
-        <div class="border-b border-gray-200 dark:border-gray-700 overflow-x-auto">
-          <nav class="flex space-x-8 px-6" aria-label="Tabs">
-            <button *ngFor="let tab of tabs" (click)="setActiveTab(tab.id)"
+        <!-- Tabs Navigation - Mobile Responsive -->
+        <div class="border-b border-gray-200 dark:border-gray-700 overflow-x-auto scrollbar-hide">
+          <nav class="flex space-x-4 sm:space-x-8 px-4 sm:px-6 min-w-max sm:min-w-0" aria-label="Tabs">
+            <button
+              *ngFor="let tab of tabs"
+              (click)="setActiveTab(tab.id)"
               [class]="activeTab === tab.id
-                      ? 'border-b-2 border-green-500 py-3 px-1 text-sm font-medium text-green-600 dark:text-green-400 whitespace-nowrap'
-                      : 'border-b-2 border-transparent py-3 px-1 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 whitespace-nowrap'">
-              {{tab.label}}
+                      ? 'border-b-2 border-green-500 py-2 sm:py-3 px-1 text-xs sm:text-sm font-medium text-green-600 dark:text-green-400 whitespace-nowrap transition-all duration-300 transform hover:scale-105'
+                      : 'border-b-2 border-transparent py-2 sm:py-3 px-1 text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 whitespace-nowrap transition-all duration-300 hover:scale-105'">
+              <span class="block sm:inline">{{tab.label}}</span>
             </button>
           </nav>
         </div>
 
         <!-- Content Area -->
-        <div class="p-6">
+        <div class="p-4 sm:p-6 tab-content">
           <!-- Experience Tab Content -->
-          <div *ngIf="activeTab === 'experience'">
+          <div *ngIf="activeTab === 'experience'" class="animate-fade-in">
             <app-experience></app-experience>
           </div>
 
           <!-- Skills Tab Content -->
-          <div *ngIf="activeTab === 'skills'">
+          <div *ngIf="activeTab === 'skills'" class="animate-fade-in">
             <app-skills></app-skills>
           </div>
 
           <!-- Education Tab Content -->
-          <div *ngIf="activeTab === 'education'">
+          <div *ngIf="activeTab === 'education'" class="animate-fade-in">
             <app-education></app-education>
           </div>
 
           <!-- Languages Tab Content -->
-          <div *ngIf="activeTab === 'languages'">
+          <div *ngIf="activeTab === 'languages'" class="animate-fade-in">
             <app-languages></app-languages>
           </div>
 
           <!-- Activity Tab Content -->
-          <div *ngIf="activeTab === 'activity'">
+          <div *ngIf="activeTab === 'activity'" class="animate-fade-in">
             <app-activity></app-activity>
           </div>
 
           <!-- Volunteering Tab Content -->
-          <div *ngIf="activeTab === 'volunteering'">
+          <div *ngIf="activeTab === 'volunteering'" class="animate-fade-in">
             <app-volunteering></app-volunteering>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="mt-6">
-      <div
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-        <div class="p-6">
+    <!-- Projects Section -->
+    <section class="animate-section mb-6 sm:mb-8">
+      <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl">
+        <div class="p-4 sm:p-6">
           <app-projects></app-projects>
         </div>
       </div>
     </section>
 
-
     <!-- Contact Section -->
-
-    <section class="mt-6">
-      <div
-        class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
-        <div class="p-6">
+    <section class="animate-section">
+      <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg sm:rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden transition-all duration-300 hover:shadow-xl">
+        <div class="p-4 sm:p-6">
           <app-contact></app-contact>
         </div>
       </div>

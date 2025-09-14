@@ -11,20 +11,37 @@ import { CommonModule } from '@angular/common';
 export class EducationComponent {
   educations = [
     {
-      institution: 'University of Dhaka',
+      institution: 'United International University (UIU)',
       degree: 'Bachelor of Science in Computer Science',
-      duration: '2018 - 2022',
-      grade: 'CGPA: 3.85/4.00',
-      logo: 'https://via.placeholder.com/48x48/dc2626/ffffff?text=DU',
+      duration: '2016 - 2022',
+      grade: 'CGPA: 2.92/4.00',
+      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/United_International_University_Monogram.svg/250px-United_International_University_Monogram.svg.png',
       description: 'Specialized in Software Engineering and Web Technologies. Completed thesis on "Modern Web Application Development using Angular and Node.js".',
-      activities: ['Programming Club President', 'Web Development Workshop Organizer', 'Dean\'s List (2020, 2021)']
+      activities: ['Social Services Club', 'Web Development Workshop Organizer', 'Programming Contest Participant', 'Volunteer at Tech Events, Hackathons']
     },
     {
-      institution: 'Dhaka College',
+      institution: 'Süleyman Demirel University, Isparta, Turkey',
+      degree: 'Studied Physics',
+      duration: '2018-2020',
+      grade: 'CGPA: 3.00/4.00',
+      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/ea/S%C3%BCleyman_Demirel_University_logo.svg/250px-S%C3%BCleyman_Demirel_University_logo.svg.png',
+      description: 'Focused on theoretical and applied physics courses, including Quantum Mechanics, Electromagnetism, and Thermodynamics.',
+      activities: ['Physics Club Member', 'Science Fair Participant', 'Cultural Exchange Programs', 'Volunteer at University Events', 'Member of International Students Association']
+    },{
+       institution: 'Süleyman Demirel University, Isparta, Turkey',
+      degree: 'Turkish Language Proficiency Course',
+      duration: '2018-2019(9 months)',
+      grade: 'C1 Level Proficiency',
+      logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/e/ea/S%C3%BCleyman_Demirel_University_logo.svg/250px-S%C3%BCleyman_Demirel_University_logo.svg.png',
+      description: 'Completed an intensive Turkish language course focusing on advanced grammar, conversation skills, and cultural immersion.',
+      activities: [' Language Exchange Partner', 'Cultural Event Organizer', 'Volunteer at Language Workshops']
+    },
+    {
+      institution: 'Government K.C College, Jhenaidah',
       degree: 'Higher Secondary Certificate (HSC)',
-      duration: '2016 - 2018',
-      grade: 'GPA: 5.00/5.00',
-      logo: 'https://via.placeholder.com/48x48/059669/ffffff?text=DC',
+      duration: '2013- 2015',
+      grade: 'GPA: 4.58/5.00',
+      logo: 'https://www.kccollege.edu.bd/template/institute_logo/1_logo.jpeg',
       description: 'Science Group with focus on Mathematics, Physics, and Chemistry.',
       activities: ['Science Club Member', 'Mathematics Olympiad Participant']
     }

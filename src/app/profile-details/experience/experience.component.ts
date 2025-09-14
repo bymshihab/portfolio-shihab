@@ -11,31 +11,31 @@ import { CommonModule } from '@angular/common';
 export class ExperienceComponent {
   experiences = [
     {
-      company: 'KloverCloud Limited',
+      company: 'KloverCloud',
       position: 'Software Engineer',
-      duration: 'Jan 2023 - Present',
+      duration: 'April 2025 - Present',
       location: 'Dhaka, Bangladesh',
-      logo: 'https://via.placeholder.com/48x48/1e40af/ffffff?text=KC',
+      logo: 'https://media.licdn.com/dms/image/v2/C560BAQGFyb7pO9Lpfg/company-logo_100_100/company-logo_100_100/0/1630587124719?e=1760572800&v=beta&t=Np_K9A0_8wtxwIs3QAVbGqiaBGW3NgmnRUsTkEW5JUA',
       description: 'Developing scalable web applications using Angular, TypeScript, and modern web technologies. Working on enterprise-level projects with microservices architecture.',
-      skills: ['Angular', 'TypeScript', 'Node.js', 'MongoDB']
+      skills: ['Angular', 'TypeScript', 'RxJS', 'Unit Testing', 'Git', 'Agile']
     },
     {
-      company: 'Tech Solutions BD',
-      position: 'Junior Developer',
-      duration: 'Jun 2022 - Dec 2022',
+      company: 'NDE Steel Structures Ltd.',
+      position: 'Associate Software Engineer',
+      duration: 'Jul 2023 - March 2025',
       location: 'Dhaka, Bangladesh',
-      logo: 'https://via.placeholder.com/48x48/059669/ffffff?text=TS',
-      description: 'Built responsive web applications and collaborated with cross-functional teams to deliver high-quality software solutions.',
-      skills: ['JavaScript', 'React', 'CSS', 'Git']
+       logo: 'https://media.licdn.com/dms/image/v2/C4D0BAQG7uRecCytUJQ/company-logo_100_100/company-logo_100_100/0/1631332407725?e=1760572800&v=beta&t=prBvKzSfKj35CiuNaADOdiTz37Zgn7GvUZIFrw0_RQY',
+      description: 'Contributed to the development of internal tools and client-facing applications. Improved application performance and user experience through code optimization and modern design practices.',
+      skills: ['JavaScript', 'React', 'CSS', 'Git', 'Agile', 'MSSQL', '.NET']
     },
     {
-      company: 'Freelance',
-      position: 'Web Developer',
-      duration: 'Jan 2022 - May 2022',
+      company: 'NDE Steel Structures Ltd.',
+      position: 'Software Engineer Intern',
+      duration: 'Dec 2022 - Jun 2023',
       location: 'Remote',
-      logo: 'https://via.placeholder.com/48x48/7c3aed/ffffff?text=FL',
+      logo: 'https://media.licdn.com/dms/image/v2/C4D0BAQG7uRecCytUJQ/company-logo_100_100/company-logo_100_100/0/1631332407725?e=1760572800&v=beta&t=prBvKzSfKj35CiuNaADOdiTz37Zgn7GvUZIFrw0_RQY',
       description: 'Developed custom websites for small businesses and startups. Focused on modern UI/UX design and performance optimization.',
-      skills: ['HTML', 'CSS', 'JavaScript', 'WordPress']
+      skills: ['HTML', 'CSS', 'JavaScript', ' Bootstrap']
     }
   ];
 }

@@ -19,20 +19,20 @@ export class LanguagesComponent {
     {
       name: 'English',
       proficiency: 'Professional Working',
-      level: 85,
+      level: 75,
       flag: '🇺🇸'
     },
+    // {
+    //   name: 'Hindi',
+    //   proficiency: 'Limited Working',
+    //   level: 60,
+    //   flag: '🇮🇳'
+    // },
     {
-      name: 'Hindi',
-      proficiency: 'Limited Working',
-      level: 60,
-      flag: '🇮🇳'
-    },
-    {
-      name: 'Arabic',
-      proficiency: 'Elementary',
-      level: 30,
-      flag: '🇸🇦'
+      name: 'Turkish',
+      proficiency: 'C1 Level Proficiency',
+      level: 80,
+      flag: '🇹🇷'
     }
   ];
 }

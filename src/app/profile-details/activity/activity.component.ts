@@ -14,8 +14,25 @@ export class ActivityComponent implements OnInit {
   activities: Activity[] = [];
   loading = true;
   error: string | null = null;
+  showAllActivities = false;
+  readonly INITIAL_DISPLAY_COUNT = 5;
 
   constructor(private activityService: ActivityService) {}
+
+  get displayedActivities(): Activity[] {
+    if (this.showAllActivities) {
+      return this.activities;
+    }
+    return this.activities.slice(0, this.INITIAL_DISPLAY_COUNT);
+  }
+
+  get shouldShowSeeMore(): boolean {
+    return this.activities.length > this.INITIAL_DISPLAY_COUNT && !this.showAllActivities;
+  }
+
+  get shouldShowSeeLess(): boolean {
+    return this.activities.length > this.INITIAL_DISPLAY_COUNT && this.showAllActivities;
+  }
 
   ngOnInit() {
     this.loadActivities();
@@ -41,10 +58,13 @@ export class ActivityComponent implements OnInit {
   }
 
   refreshActivities() {
+    this.showAllActivities = false; // Reset to initial state when refreshing
     this.loadActivities();
   }
 
-  openActivity(activity: Activity) {
+  toggleShowAll() {
+    this.showAllActivities = !this.showAllActivities;
+  }  openActivity(activity: Activity) {
     if (activity.url) {
       window.open(activity.url, '_blank');
     }

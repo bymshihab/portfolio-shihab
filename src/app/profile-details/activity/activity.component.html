@@ -1,82 +1,139 @@
 <div class="space-y-6">
-  <div *ngFor="let activity of activities" class="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0">
-    <div class="flex items-start space-x-3">
-      <!-- Activity Icon -->
-      <div class="flex-shrink-0">
-        <div class="w-10 h-10 rounded-full flex items-center justify-center"
-             [ngClass]="{
-               'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-400': activity.type === 'post',
-               'bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400': activity.type === 'article',
-               'bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-400': activity.type === 'reaction',
-               'bg-yellow-100 text-yellow-600 dark:bg-yellow-900 dark:text-yellow-400': activity.type === 'achievement'
-             }">
-          <!-- Post Icon -->
-          <svg *ngIf="activity.type === 'post'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path>
-          </svg>
-          <!-- Article Icon -->
-          <svg *ngIf="activity.type === 'article'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
-          </svg>
-          <!-- Heart Icon -->
-          <svg *ngIf="activity.type === 'reaction'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-          </svg>
-          <!-- Trophy Icon -->
-          <svg *ngIf="activity.type === 'achievement'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 2L3 7v11l7-5 7 5V7l-7-5z" clip-rule="evenodd"></path>
-          </svg>
-        </div>
-      </div>
+  <!-- Loading State -->
+  <div *ngIf="loading" class="flex justify-center items-center py-8">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+    <span class="ml-2 text-gray-600 dark:text-gray-400">Loading activities...</span>
+  </div>
 
-      <!-- Activity Content -->
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between">
-          <h3 class="text-sm font-medium text-gray-900 dark:text-white">{{activity.title}}</h3>
-          <span class="text-xs text-gray-500 dark:text-gray-400">{{activity.timestamp}}</span>
-        </div>
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="text-center py-8">
+    <div class="text-red-600 dark:text-red-400 mb-4">{{ error }}</div>
+    <button
+      (click)="refreshActivities()"
+      class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+      Try Again
+    </button>
+  </div>
 
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
-          {{activity.content}}
-        </p>
+  <!-- Activities List -->
+  <div *ngIf="!loading && !error">
+    <!-- Refresh Button -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Activity</h2>
+      <button
+        (click)="refreshActivities()"
+        class="p-2 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        title="Refresh activities">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+        </svg>
+      </button>
+    </div>
 
-        <!-- Activity Image -->
-        <div *ngIf="activity.image" class="mt-3">
-          <img [src]="activity.image" alt="Activity image" class="rounded-lg max-w-full h-auto">
-        </div>
-
-        <!-- Engagement Stats -->
-        <div *ngIf="activity.likes !== null" class="flex items-center space-x-6 mt-3 text-xs text-gray-500 dark:text-gray-400">
-          <span class="flex items-center space-x-1">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
-            </svg>
-            <span>{{activity.likes}}</span>
-          </span>
-          <span class="flex items-center space-x-1">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+    <!-- Activities -->
+    <div *ngFor="let activity of activities"
+         class="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0"
+         [class.cursor-pointer]="activity.url"
+         (click)="activity.url ? openActivity(activity) : null">
+      <div class="flex items-start space-x-3">
+        <!-- Activity Icon -->
+        <div class="flex-shrink-0">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center"
+               [ngClass]="{
+                 'bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-400': activity.type === 'post',
+                 'bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400': activity.type === 'article',
+                 'bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-400': activity.type === 'reaction',
+                 'bg-yellow-100 text-yellow-600 dark:bg-yellow-900 dark:text-yellow-400': activity.type === 'achievement',
+                 'bg-purple-100 text-purple-600 dark:bg-purple-900 dark:text-purple-400': activity.type === 'medium'
+               }">
+            <!-- Post Icon -->
+            <svg *ngIf="activity.type === 'post'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path>
             </svg>
-            <span>{{activity.comments}}</span>
-          </span>
-          <span class="flex items-center space-x-1">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z" clip-rule="evenodd"></path>
+            <!-- Article/Medium Icon -->
+            <svg *ngIf="activity.type === 'article' || activity.type === 'medium'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
             </svg>
-            <span>{{activity.shares}}</span>
-          </span>
+            <!-- Heart Icon -->
+            <svg *ngIf="activity.type === 'reaction'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+            </svg>
+            <!-- Trophy Icon -->
+            <svg *ngIf="activity.type === 'achievement'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2L3 7v11l7-5 7 5V7l-7-5z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Activity Content -->
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <h3 class="text-sm font-medium text-gray-900 dark:text-white">{{activity.title}}</h3>
+              <!-- Source Badge -->
+              <span *ngIf="activity.source"
+                    class="px-2 py-1 text-xs rounded-full"
+                    [ngClass]="{
+                      'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200': activity.source === 'medium',
+                      'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200': activity.source === 'linkedin',
+                      'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200': activity.source === 'manual'
+                    }">
+                {{ activity.source }}
+              </span>
+            </div>
+            <span class="text-xs text-gray-500 dark:text-gray-400">{{activity.timestamp}}</span>
+          </div>
+
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 leading-relaxed">
+            {{activity.content}}
+          </p>
+
+          <!-- External Link Indicator -->
+          <div *ngIf="activity.url" class="mt-2">
+            <span class="inline-flex items-center text-xs text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300">
+              <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+              Read more
+            </span>
+          </div>
+
+          <!-- Activity Image -->
+          <div *ngIf="activity.image" class="mt-3">
+            <img [src]="activity.image" alt="Activity image" class="rounded-lg max-w-full h-auto max-h-48 object-cover">
+          </div>
+
+          <!-- Engagement Stats -->
+          <div *ngIf="activity.likes !== null" class="flex items-center space-x-6 mt-3 text-xs text-gray-500 dark:text-gray-400">
+            <span class="flex items-center space-x-1">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+              </svg>
+              <span>{{activity.likes}}</span>
+            </span>
+            <span class="flex items-center space-x-1">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path>
+              </svg>
+              <span>{{activity.comments}}</span>
+            </span>
+            <span class="flex items-center space-x-1">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z" clip-rule="evenodd"></path>
+              </svg>
+              <span>{{activity.shares}}</span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Show More Button -->
-  <!-- <div class="text-center pt-4">
-    <button class="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors">
-      Show more activity
-      <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    <!-- Empty State -->
+    <div *ngIf="activities.length === 0" class="text-center py-8 text-gray-500 dark:text-gray-400">
+      <svg class="w-12 h-12 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1H7a1 1 0 00-1 1v1m8 0V4.5"></path>
       </svg>
-    </button>
-  </div> -->
+      <p>No activities found</p>
+    </div>
+  </div>
 </div>
